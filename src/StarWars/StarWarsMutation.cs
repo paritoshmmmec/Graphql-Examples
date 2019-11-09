@@ -1,5 +1,6 @@
 using GraphQL.Types;
 using StarWars.Types;
+using System;
 
 namespace StarWars
 {
@@ -30,6 +31,30 @@ namespace StarWars
                     var human = context.GetArgument<Human>("human");
                     return data.AddHuman(human);
                 });
+
+            Field<HumanType>(
+                "deleteHuman",
+                arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id", Description = "id of the human" }
+                ),
+                resolve: context =>
+                {
+                    var human = new Human() {
+                        Id = Guid.NewGuid().ToString()
+                    };
+                    return human;
+                });
+            Field<HumanType>(
+              "updateHuman",
+              arguments: new QueryArguments(
+                    new QueryArgument<NonNullGraphType<HumanInputType>> { Name = "human" }
+                ),
+                resolve: context =>
+                {
+                    var human = context.GetArgument<Human>("human");
+                    return data.AddHuman(human);
+                });
+
         }
     }
 }
