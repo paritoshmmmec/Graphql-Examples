@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,19 @@ namespace EcommerceApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IDependencyResolver>(x =>
+                new FuncDependencyResolver(x.GetRequiredService));
+
+            services.AddScoped<AppSchema>();
+            services.AddGraphQL(x =>
+            {
+                x.ExposeExceptions = true; //set true only in development mode. make it switchable.
+            })
+            .AddGraphTypes(ServiceLifetime.Scoped);
+
+            services.AddScoped<EcommerceApiQuery>();
+            services.AddScoped<OwnerType>();
             services.AddControllers();
         }
 
@@ -37,6 +53,8 @@ namespace EcommerceApi
             }
 
             app.UseHttpsRedirection();
+            app.UseGraphQL<AppSchema>();
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions()); 
 
             app.UseRouting();
 

@@ -21,6 +21,10 @@ namespace EcommerceApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseKestrel(e =>
+                    {
+                        e.AllowSynchronousIO = true;
+                    });
                 });
     }
 }
