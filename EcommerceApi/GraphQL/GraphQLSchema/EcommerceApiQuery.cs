@@ -24,8 +24,7 @@ namespace EcommerceApi
                     {
                         new Address() { Id = Guid.NewGuid().ToString(), Name = "Testing"},
                         new Address() { Id = Guid.NewGuid().ToString(), Name = "1284 Beacon st "}
-                    }
-                    };
+                    }};
                 });
         }
     }

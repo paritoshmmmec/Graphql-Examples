@@ -21,4 +21,14 @@ namespace EcommerceApi
             Field(x => x.Name).Description("Name property from the Address object.");
         }
     }
+
+    public class OwnerInputType : InputObjectGraphType<Owner>
+    {
+        public OwnerInputType()
+        {
+            Name = "OwnerInput";
+            Field(x => x.Name);
+            Field(x => x.Addresses, nullable: true);
+        }
+    }
 }
