@@ -10,13 +10,13 @@ namespace EcommerceApi
     {
         public EcommerceApiQuery()
         {
-            Name = "Query";
-
             Field<QuestionType>(
               "question",
               arguments: new QueryArguments(
-                  new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "projectId", Description = "Project Id" },
-                  new QueryArgument<NonNullGraphType<ListGraphType<StringGraphType>>> { Name = "partIds", Description = "partid" }
+                  new QueryArgument<NonNullGraphType<IntGraphType>>
+                  { Name = "projectId", Description = "Project Id" },
+                  new QueryArgument<NonNullGraphType<ListGraphType<StringGraphType>>>
+                  { Name = "partIds", Description = "partid" }
               ),
               resolve: context =>
               {
@@ -26,6 +26,26 @@ namespace EcommerceApi
                   {
                       ProjectId = projectId,
                       Parts = partIds
+                  };
+              }
+          );
+
+            Field<QuestionType>(
+              "questionByProjectId",
+              arguments: new QueryArguments(
+                  new QueryArgument<NonNullGraphType<IntGraphType>>
+                  { Name = "projectId", Description = "Project Id" }
+              ),
+              resolve: context =>
+              {
+                  var projectId = context.GetArgument<int>("projectId");
+                  return new Question()
+                  {
+                      ProjectId = projectId,
+                      Parts = new List<string>()
+                      {
+                          "Testing" , "Hero"
+                      }
                   };
               }
           );

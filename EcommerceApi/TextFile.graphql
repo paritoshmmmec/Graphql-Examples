@@ -1,3 +1,28 @@
+# Alias and query
+
+# Write your query or mutation here
+query {
+  question(
+    projectId: 1
+    partIds: ["1233", "23445", "3ew34343", "232323525zs"]
+  ) {
+    parts
+    projectId
+  }
+
+  y: questionByProjectId(projectId: 3) {
+    parts
+    projectId
+  }
+
+  x: questionByProjectId(projectId: 4) {
+    parts
+    projectId
+  }
+}
+
+
+
 # Write your query or mutation here
 query {
   question (projectId :1 , partIds:["1233", "23445", "3ew34343", "232323525zs"]){
@@ -5,3 +30,20 @@ query {
     projectId
   }
 }
+
+# Write your query or mutation here
+query {
+  question(
+    projectId: 1
+    partIds: ["1233", "23445", "3ew34343", "232323525zs"]
+  ) {
+    parts
+    projectId
+  }
+
+  questionByProjectId(projectId: 1) {
+    parts
+    projectId
+  }
+}
+
