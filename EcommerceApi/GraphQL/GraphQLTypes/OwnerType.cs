@@ -3,6 +3,15 @@ using System.Collections.Generic;
 
 namespace EcommerceApi
 {
+    public class QuestionType : ObjectGraphType<Question>
+    {
+        public QuestionType()
+        {
+            Field(x => x.ProjectId);
+            Field(x => x.Parts, type: typeof(ListGraphType<StringGraphType>)).Description("Name property from the owner object.");
+        }
+    }
+
     public class OwnerType : ObjectGraphType<Owner>
     {
         public OwnerType()
@@ -22,13 +31,21 @@ namespace EcommerceApi
         }
     }
 
-    public class OwnerInputType : InputObjectGraphType<Owner>
+    public class OwnerInputType : InputObjectGraphType
     {
         public OwnerInputType()
         {
-            Name = "OwnerInput";
-            Field(x => x.Name);
-            Field(x => x.Addresses, nullable: true);
+            Field<ListGraphType<FooInput>>("foos");
+        }
+    }
+
+    public class FooInput : InputObjectGraphType
+    {
+        public FooInput()
+        {
+            Name = "InputForSingleFoo";
+            Field<StringGraphType>("name");
         }
     }
 }
+

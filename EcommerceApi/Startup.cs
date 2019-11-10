@@ -40,6 +40,7 @@ namespace EcommerceApi
             .AddGraphTypes(ServiceLifetime.Scoped);
 
             services.AddScoped<EcommerceApiQuery>();
+            services.AddScoped<EcommerceApiMutation>();
             services.AddScoped<OwnerType>();
             services.AddControllers();
         }

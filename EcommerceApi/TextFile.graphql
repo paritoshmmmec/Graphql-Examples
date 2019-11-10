@@ -1,0 +1,7 @@
+# Write your query or mutation here
+query {
+  question (projectId :1 , partIds:["1233", "23445", "3ew34343", "232323525zs"]){
+    parts
+    projectId
+  }
+}

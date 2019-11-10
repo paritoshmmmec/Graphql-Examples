@@ -1,4 +1,3 @@
-using EcommerceApi.GraphQL;
 using GraphQL;
 using GraphQL.Types;
 
@@ -10,8 +9,7 @@ namespace EcommerceApi
             : base(resolver)
         {
             Query = resolver.Resolve<EcommerceApiQuery>();
-            Mutation = resolver.Resolve<EcommerceApiMutation>();
-
+            //Mutation = resolver.Resolve<EcommerceApiMutation>();
         }
     }
 }
